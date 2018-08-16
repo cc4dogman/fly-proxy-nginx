@@ -8,6 +8,7 @@ const baseProxy = require('./utils/baseProxy');
 const weightedArray = require('weighted-array');
 var checkAlive = require("./module/checkalive");
 var randomstring = require("randomstring");
+var Promise = require("bluebird");
 
 function randomServerId() {
     return randomstring.generate(7);
@@ -19,6 +20,10 @@ class Proxy extends baseProxy {
         const mildArr = [];
         const {proxies, rewrite, proxyTimeout} = this.options;
         this.handle(proxyServer);
+        proxyServer.on('proxyRes', function (proxyRes, req, res) {
+            req.ctx.proxyRes = proxyRes;
+            req.resolve();
+        });
         proxies.forEach(proxy => {
             var upstreams = proxy.upstreams;
             var items = [];
@@ -101,13 +106,9 @@ class Proxy extends baseProxy {
                         );
                     }
                     proxyOptions.target = upStream.url;
-                    ctx.req.ctx = ctx;
-                    ctx.req.upStream = upStream;
-                    proxyServer.on('proxyRes', function (proxyRes, req, res) {
-                        req.ctx.proxyRes = proxyRes;
-                        resolve();
-                    });
                     ctx.proxyOptions = proxyOptions;
+                    ctx.req.ctx = ctx;
+                    ctx.req.resolve = resolve;
                     ctx.res.setHeader("X-Backend-Server", upStream.id);
                     proxyServer.web(ctx.req, ctx.res, proxyOptions, e => {
                         const status = {

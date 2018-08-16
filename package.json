@@ -1,6 +1,6 @@
 {
   "name": "fly-proxy-nginx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -38,6 +38,7 @@
     "yorkie": "^1.0.3"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "http-proxy": "^1.16.2",
     "is-port-reachable": "^2.0.0",
     "moment": "^2.22.2",
