@@ -1,15 +1,11 @@
 {
   "name": "fly-proxy-nginx",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "npm run lint --fix && jest",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged",
-    "commit-msg": "node verify_commit_msg.js"
   },
   "repository": {
     "type": "git",

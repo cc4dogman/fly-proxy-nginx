@@ -9,8 +9,13 @@ module.exports = () => {
                     break;
                 }
             }
+            ctx.status = ctx.proxyRes.statusCode;
+            ctx.message = ctx.proxyRes.statusMessage;
             ctx.body = ctx.proxyRes.pipe(ctx.res);
+        } else {
+            //console.log("not found proxyRes");
         }
+
         // var body;
         // ctx.proxyRes.on('data', (chunk) => {
         //     body += chunk;

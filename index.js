@@ -2,7 +2,9 @@
  * Created by ly_wu on 2017/6/21.
  */
 const HttpProxy = require('http-proxy');
-const proxyServer = HttpProxy.createProxyServer({selfHandleResponse: true});
+const http = require('http');
+const keepAliveAgent = new http.Agent({ keepAlive: true });
+const proxyServer = HttpProxy.createProxyServer({selfHandleResponse: true,agent: keepAliveAgent});
 const compose = require('koa-compose');
 const baseProxy = require('./utils/baseProxy');
 const weightedArray = require('weighted-array');
