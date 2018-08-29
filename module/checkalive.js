@@ -13,7 +13,7 @@ module.exports = {
             var server = upstreams[i];
             var url = server.url;
             var uri = new URL(url);
-            if (await isPortReachable(uri.port, {host: uri.hostname})) {
+            if (await isPortReachable(uri.port === '' ? 80 : uri.port, {host: uri.hostname})) {
                 alivelist.push(server);
                 if (server.isdown) {
                     console.log("server[%s] is up...", url);

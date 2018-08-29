@@ -44,7 +44,7 @@ class Proxy extends baseProxy {
                 target: proxy.host,
                 upstreams: proxyObj,
                 changeOrigin: true,
-                xfwd: true,
+                xfwd: proxy.xfwd == undefined ? true : proxy.xfwd,
                 rewrite: proxy.rewrite || rewrite(pattern),
                 logs: proxy.enablelog == undefined ? false : proxy.enablelog,
                 proxyTimeout: proxy.proxyTimeout || proxyTimeout,
