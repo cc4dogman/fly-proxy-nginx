@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
-    "http-proxy": "^1.16.2",
+    "http-proxy": "^1.18.1",
     "is-port-reachable": "^2.0.0",
     "moment": "^2.22.2",
     "randomstring": "^1.1.5",
